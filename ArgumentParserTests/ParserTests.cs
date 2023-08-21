@@ -31,11 +31,11 @@ namespace ArgumentParser.Tests
         {
             Parser p = new Parser(
                 Parameter.Flag("s0", "-s", "--switch"),
-                Parameter.Named("p0", s => s, "pe0", "-p0", "--parameter0"),
+                Parameter.Named("p0", "pe0", s => s, "-p0", "--parameter0"),
                 Parameter.Required("req0", s => int.Parse(s)),
-                Parameter.Optional("opt0", s => int.Parse(s), 12),
-                Parameter.Optional("opt1", s => double.Parse(s), 0.12),
-                Parameter.Optional("opt2", s => s, "Bla")
+                Parameter.Optional("opt0", 12, s => int.Parse(s)),
+                Parameter.Optional("opt1", 0.12, s => double.Parse(s)),
+                Parameter.Optional("opt2", "Bla")
             );
             List<string> unmapped = p.Map(new string[] { "255" });
 
@@ -59,7 +59,7 @@ namespace ArgumentParser.Tests
         [TestMethod()]
         public void Map_IgnoresDuplicateNamed()
         {
-            Parser p = new Parser(Parameter.Named("n", i => int.Parse(i), 0, "-s", "--switch"));
+            Parser p = new Parser(Parameter.Named("n", 0, i => int.Parse(i), "-s", "--switch"));
             p.Map(new string[] { "-s", "1", "--switch", "2" });
             Assert.AreEqual(1, p.Value<int>("-s"), "-s");
         }
@@ -90,11 +90,11 @@ namespace ArgumentParser.Tests
         {
             Parser p = new Parser(
                 Parameter.Flag("s0", "-s", "--switch"),
-                Parameter.Named("p0", s => s, "pe0", "-p0", "--parameter0"),
+                Parameter.Named("p0", "pe0", s => s, "-p0", "--parameter0"),
                 Parameter.Required("req0", s => int.Parse(s)),
-                Parameter.Optional("opt0", s => int.Parse(s), 12),
-                Parameter.Optional("opt1", s => double.Parse(s), 0.12),
-                Parameter.Optional("opt2", s => s, "Bla")
+                Parameter.Optional("opt0", 12, s => int.Parse(s)),
+                Parameter.Optional("opt1", 0.12, s => double.Parse(s)),
+                Parameter.Optional("opt2", "Bla")
             );
 
             List<string> unmapped = p.Map(new string[] {

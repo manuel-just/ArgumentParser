@@ -10,7 +10,7 @@ namespace ArgumentParser.Tests
         public void Name_IsAssignedInConstructor()
         {
             string name = "This is a name";
-            Parameter p = Parameter.Named(name, _ => null, new object(), new string[0]);
+            Parameter p = Parameter.Named(name, new object(), _ => null, new string[0]);
 
             Assert.AreEqual(name, p.Name, "Name");
         }
@@ -19,7 +19,7 @@ namespace ArgumentParser.Tests
         public void Aliases_IsAssignedInConstructor()
         {
             string[] aliases = new[] { "a", "b", "c", "d" };
-            Parameter p = Parameter.Named("", _ => null, new object(), aliases);
+            Parameter p = Parameter.Named("", new object(), _ => null, aliases);
 
             CollectionAssert.AreEqual(new[] { p.Name }.Concat(aliases).ToArray(), p.Aliases, "Aliases");
         }
@@ -27,7 +27,7 @@ namespace ArgumentParser.Tests
         [TestMethod()]
         public void ParseMethod_DefaultsToIdentity()
         {
-            Parameter p = Parameter.Named("", null, new object(), new string[0]);
+            Parameter p = Parameter.Named("", new object(), null, new string[0]);
 
             p.StringValue = "this is a string";
             object output = p.Value<object>();
@@ -41,7 +41,7 @@ namespace ArgumentParser.Tests
         {
             object parseValue = new object();
             bool parseCalled = false;
-            Parameter p = Parameter.Named("", _ => { parseCalled = true; return parseValue; }, new object(), new string[0]);
+            Parameter p = Parameter.Named("", new object(), _ => { parseCalled = true; return parseValue; }, new string[0]);
 
             p.StringValue = "not null";
             object output = p.Value<object>();
@@ -55,7 +55,7 @@ namespace ArgumentParser.Tests
         {
             object defaultValue = new object();
             bool parseCalled = false;
-            Parameter p = Parameter.Named("", _ => { parseCalled = true; return null; }, defaultValue, new string[0]);
+            Parameter p = Parameter.Named("", defaultValue, _ => { parseCalled = true; return null; }, new string[0]);
 
             Assert.IsNull(p.StringValue, "StringValue");
             object output = p.Value<object>();

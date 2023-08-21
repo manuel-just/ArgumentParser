@@ -102,10 +102,10 @@ namespace ArgumentParser
         /// Named Parameter (such as: <c>app.exe --filename C:\temp\inputfile.txt</c>)
         /// </summary>
         /// <param name="name">Primary name</param>
-        /// <param name="parse">Parse function to use for <see cref="Value{T}"/></param>
         /// <param name="defaultValue">Default value for <see cref="Value{T}"/></param>
+        /// <param name="parse">Parse function to use for <see cref="Value{T}"/>. Defaults to the string identity function.</param>
         /// <param name="alternateNames">Alternative names. Will make up the <see cref="Aliases"/> in conjunction with the <see cref="Name"/></param>
-        public static Parameter Named(string name, Parse parse = null, object defaultValue = null, params string[] aliases)
+        public static Parameter Named(string name, object defaultValue, Parse parse = null, params string[] aliases)
         {
             return new Parameter(ParameterType.Named, name, parse, defaultValue, aliases);
         }
@@ -121,21 +121,21 @@ namespace ArgumentParser
         }
 
         /// <summary>
-        /// Optional Parameter (such as: <c>app.exe C:\temp\inputfile.txt</c>). Defaults the <see cref="Value{T}"/> to the provided devalut value.
+        /// Optional Parameter (such as: <c>app.exe C:\temp\outputfile.txt</c>). Defaults the <see cref="Value{T}"/> to the provided devalut value.
         /// </summary>
         /// <param name="name">Primary name</param>
-        /// <param name="parse">Parse function to use for <see cref="Value{T}"/></param>
         /// <param name="defaultValue">Default value for <see cref="Value{T}"/></param>
-        public static Parameter Optional(string name, Parse parse = null, object defaultValue = null)
+        /// <param name="parse">Parse function to use for <see cref="Value{T}"/>. Defaults to the string identity function.</param>
+        public static Parameter Optional(string name, object defaultValue, Parse parse = null)
         {
             return new Parameter(ParameterType.Optional, name, parse, defaultValue, new string[0]);
         }
 
         /// <summary>
-        /// Optional Parameter (such as: <c>app.exe C:\temp\inputfile.txt</c>). Defaults the <see cref="Value{T}"/> to null.
+        /// Required Parameter (such as: <c>app.exe C:\temp\inputfile.txt</c>).
         /// </summary>
         /// <param name="name">Primary name</param>
-        /// <param name="parse">Parse function to use for <see cref="Value{T}"/></param>
+        /// <param name="parse">Parse function to use for <see cref="Value{T}"/>. Defaults to the string identity function.</param>
         public static Parameter Required(string name, Parse parse = null)
         {
             return new Parameter(ParameterType.Required, name, parse, null, new string[0]);

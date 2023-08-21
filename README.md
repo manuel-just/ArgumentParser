@@ -72,7 +72,7 @@ static void Main(string[] args)
 
 }
 ```
-#### Setting up the parser
+### Setting up the parser
 You can specify the parameters in any order. However, it is best practice to specify the positional parameters last.
 ```C#
           Parameter.Flag("-v", "--verbose"),
@@ -91,7 +91,7 @@ A required parameter is specified with the identifier `"name"` and an identity p
 ```
 An optional parameter is specified with the identifier `"port"`, the default value of `8080` and a lambda function using the `int.Parse(...)` method.
 
-#### Mapping the arguments
+### Mapping the arguments
 ```C#
       // use this, if you want to allow undefined arguments
       List<string> unmapped = p.Map(args);
@@ -110,6 +110,5 @@ The strict method maps all arguments to the parameters defined on the parser. If
       Console.WriteLine($"Log level is {p["-l"].Value<LogLevel>()}");
       Console.WriteLine($"Name is {p.Value<string>("name")}");
       Console.WriteLine($"Port is {p.Value<int>("port")}");
-}
 ```
 The example shows the two possible ways to access the parameter values and how to output them to the console. Note, that you must specify the type for the generic functions. In most scenarios, the C# compiler can not infer the type for the parameter values.

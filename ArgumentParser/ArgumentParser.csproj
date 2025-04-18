@@ -8,7 +8,7 @@
     <Company>Ypsomed AG</Company>
     <Description>A simple and lightweight utility for parsing command line arguments.</Description>
     <Copyright>2025 Ypsomed AG</Copyright>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <PackageLicenseExpression>0BSD</PackageLicenseExpression>
     <PackageIcon>ypsomed.png</PackageIcon>
     <PackageIconUrl />

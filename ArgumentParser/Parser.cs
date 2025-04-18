@@ -60,7 +60,7 @@ namespace ArgumentParser
 
                 return false;
             }
-            return string.Empty == helpText;
+            return null == helpText;
         }
 
         /// <summary>

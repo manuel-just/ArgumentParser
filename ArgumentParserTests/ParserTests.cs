@@ -81,8 +81,15 @@ namespace ArgumentParser.Tests
         [TestMethod()]
         public void MapStrict_ReturnsFalseAndProvidesText_WhenProvidedUnmappedArguments()
         {
-            Assert.IsFalse((new Parser()).MapStrict(new string[] { "-s" }, out string text));
+            Assert.IsFalse(new Parser().MapStrict(new string[] { "-s" }, out string text));
             Assert.IsNotNull(text);
+        }
+
+        [TestMethod()]
+        public void MapStrict_ReturnsTrue_WhenProvidedNoUnmappedArguments()
+        {
+            Assert.IsTrue(new Parser(Parameter.Flag("-s"), Parameter.Named("--unneeded", null), Parameter.Optional("--another", null), Parameter.Required("Req")).MapStrict(new string[] { "-s", "req" }, out string text));
+            Assert.IsNull(text, "Help text should be null, if strict mapping succeeded.");
         }
 
         [TestMethod()]

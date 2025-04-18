@@ -65,9 +65,9 @@ static void Main(string[] args)
       bool success = p.MapStrict(args, out string helpText);
       if (!success) Console.WriteLine(helpText);
 
-      Console.WriteLine($"Verbose output is {(p.Value<bool>("-v") ? "enabled" : "disabled")}");
+      Console.WriteLine($"Verbose output is {(p.Flag("-v") ? "enabled" : "disabled")}");
       Console.WriteLine($"Log level is {p["-l"].Value<LogLevel>()}");
-      Console.WriteLine($"Name is {p.Value<string>("name")}");
+      Console.WriteLine($"Name is {p.String("name")}");
       Console.WriteLine($"Port is {p.Value<int>("port")}");
 
 }

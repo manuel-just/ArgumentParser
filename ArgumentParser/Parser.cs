@@ -24,6 +24,22 @@ namespace ArgumentParser
         public T Value<T>(string name) => this[name].Value<T>();
 
         /// <summary>
+        /// Generic accessor to a raw string value by parameter name
+        /// </summary>
+        /// <param name="name">The parameter name</param>
+        /// <returns>The raw parameter string value</returns>
+        public string String(string name) => this[name].StringValue;
+
+        /// <summary>
+        /// Generic accessor to a flag by parameter name
+        /// </summary>
+        /// <param name="name">The flag name</param>
+        /// <returns>Whether the flag was found when mapping the argumennts</returns>
+        public bool Flag(string name) => Parameter.ParameterType.Flag == this[name].Type
+            ? this[name].Value<bool>()
+            : throw new InvalidOperationException($"Parameter {name} is not a flag.");
+
+        /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="parameters">Parameter definitions</param>
